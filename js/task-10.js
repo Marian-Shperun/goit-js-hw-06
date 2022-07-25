@@ -17,7 +17,6 @@ function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-
 function createBoxes() {
   let collectionMarkup = "";
   let divSize = 30;
@@ -35,4 +34,5 @@ function createBoxes() {
 
 function destroyBoxes() {
   refs.containerDiv.innerHTML = "";
+  refs.input.value = "";
 }
