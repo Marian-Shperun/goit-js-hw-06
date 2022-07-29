@@ -4,6 +4,8 @@ const refs = {
   destroyBtn: document.querySelector("[data-destroy]"),
   containerDiv: document.querySelector("div#boxes"),
 };
+let divSize = 20;
+let magnificationSize = "";
 
 refs.createBtn.addEventListener("click", createBoxes);
 refs.destroyBtn.addEventListener("click", destroyBoxes);
@@ -13,8 +15,7 @@ function getRandomHexColor() {
 }
 
 function createBoxes() {
-  let collectionMarkup = [];
-  let divSize = 30;
+  const collectionMarkup = [];
   const { input, containerDiv } = refs;
 
   if (input.value === "") {
@@ -23,15 +24,18 @@ function createBoxes() {
     return alert(`Введене число повинно бути від ${input.min} до ${input.max}`);
   }
 
-  for (let index = 0; index < input.value; index += 1) {
-    collectionMarkup += `<div style="width: ${divSize}px; height: ${divSize}px; background-color: ${getRandomHexColor()};"></div>`;
-    divSize += 10;
-  }
+  for (let index = 1; index <= input.value; index += 1) {
+    magnificationSize = divSize + index * 10;
+    const item = `<div style="width: ${magnificationSize}px; height: ${magnificationSize}px; background-color: ${getRandomHexColor()};"></div>`;
 
-  containerDiv.innerHTML += collectionMarkup;
+    collectionMarkup.push(item);
+  }
+  divSize = magnificationSize;
+  containerDiv.innerHTML += collectionMarkup.join("");
 }
 
 function destroyBoxes() {
   refs.containerDiv.innerHTML = "";
   refs.input.value = "";
+  divSize = 20;
 }
